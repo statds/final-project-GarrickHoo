@@ -1,0 +1,66 @@
+---
+jupyter: python3
+---
+
+# Stat 3255 
+## Final Project Proposal
+#### Garrck Ho
+
+
+##### Introducton
+
+The topic this project is going to be on is horse racing in Hong Kong. This idea piqued my interest because I when to one of these events over winter break. And going through the thought process of trying to figure out who will win the race was fascinating to me. And then a week later I watched a youtube video on how this one person created his own algorithm to predict the winner of each race. From the website, Kaggle, where I got my data, there are projects from people who have already done this idea. Even though it has been done already, I want to try to make my own model and see how accurate it can be.
+
+#### Specific Aims
+
+Using the given data, make a model to predict which horse is going to win the race. I had a very similar question when I was at this event. Because people make bets on which horse they think is going to win, I was think if there was a way to make a model to predict the winner each time. So after learning a little about data science and how to use data, I thought of this question. 
+
+#### Data description: Describe your data set (for instance: sampling scheme, number of observations, number of variables, variables of interest, nature of the variables) and the source of your data set if it is not collected by yourself. (histogram/charts... etc)
+
+The data that is being used for this project came from Kaggle. Where someone else had already collected the data from the past years of horse racing in Hong Kong. The data that was collected is split into two datasets. One is called runs and the other is called races. Both datasets have 37 columns but runs have more rows than races. In the dataset, there are times in that are missing. For example, like sec_time7, a lot of them are missing because of the distance of the race. Some races are sprints, which are shorter and some are distance, which is longer. So depending on the distance of the race, those values will change. One value that is worth checking is the lengths_behind in the runs dataset. The minimum value is below zero which is questionable. Lengths_behind means the finishing position, as the number of horse lengths behind the winner. So how can a horse be negative lengths behind? Would that not just be the winner then? In both datasets, there are both categorical and numerical variables. Some of the categorical variables are date, venue, configuration, going, horse country, and horse breed. Variables that will be used in the model will be the horse ID, trainer ID, jockey ID, all of the times from the race, placements of the race and distance. The variable 'going' is the condition of the race track. 
+
+```{python}
+import pandas as pd
+import numpy as np
+```
+
+```{python}
+runs = pd.read_csv("data/runs.csv")
+races = pd.read_csv("data/races.csv")
+pd.options.display.max_columns = None
+```
+
+```{python}
+#| scrolled: true
+runs.shape
+```
+
+```{python}
+races.shape
+```
+
+```{python}
+runs.describe()
+```
+
+```{python}
+races.describe()
+```
+
+```{python}
+races.tail()
+```
+
+```{python}
+#| scrolled: true
+runs.head()
+```
+
+#### Research design/methods/schedule
+
+The first thing that is needed to be done is to merge the two datasets together. Then go through the data and clean it, so that is can be used in a model. Then figure out which variables are important by finding the correlations between them. Use cross-validation to see which model (liner regression, Decision Tree, Random Forest, Voting) would be the most accurate one to use. And then pick the strongest one and test it. Then compare the predicted results with the actual result and conclude what the results are.
+
+#### Discussion / Conclusion
+
+What is expected by the end of this project is to have a model that will be able to predict the winner of each race with good accuracy. With other projects that are already made, this final project and help improve on top of the past created projects. With this project being made, and approved upon on. People that have access to this can then use it in the real world with real-time data. This project is only being run on old data that was collected in past years. If the results are not what is expected, then going back and changing the parameters for the model to help fit the expected result may be needed. So overall, the project will be to create a model to predict the winner of the horse race. Which will require the process of data cleaning and picking the most appropriate model to use for this project. In the end, we should have a model that presents the predicted results with the actual results. And from there we can make a conclusion on how well the model is.
+

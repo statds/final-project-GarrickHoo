@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>final-project-presentation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="final project presentation_files/libs/clipboard/clipboard.min.js"></script>
+<script src="final project presentation_files/libs/quarto-html/quarto.js"></script>
+<script src="final project presentation_files/libs/quarto-html/popper.min.js"></script>
+<script src="final project presentation_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="final project presentation_files/libs/quarto-html/anchor.min.js"></script>
+<link href="final project presentation_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="final project presentation_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="final project presentation_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="final project presentation_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="final project presentation_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="hong-kong-horse-racing" class="level1">
+<h1>Hong Kong Horse Racing</h1>
+<section id="garrick-ho" class="level4">
+<h4 class="anchored" data-anchor-id="garrick-ho">Garrick Ho</h4>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>My final project is focused on horse racing in Hong Kong. My fascination with this topic began over winter break when I attended one of these events and experienced the excitement and thrill of trying to predict the winner of the race. This interest was further piqued when I stumbled upon a YouTube video featuring an individual who had developed their own algorithm to accurately predict race outcomes. After some research, I discovered Kaggle, a website containing projects related to this topic, including several models predicting race outcomes. However, I aim to create my own model and compare it to the other ones already made. While the idea has been done before, I am eager to develop my own approach and analyze the results. Through this project, I hope to gain a deeper understanding of the variables that contribute to a horse’s success and apply this knowledge to create an accurate model for predicting race outcomes in Hong Kong’s horse racing industry.</p>
+</section>
+<section id="specific-aims" class="level2">
+<h2 class="anchored" data-anchor-id="specific-aims">Specific Aims</h2>
+<p>During my attendance at a horse racing event, I became fascinated with the idea of utilizing winning odds and placing odds to predict the winning horse. These odds were made available to spectators thirty minutes prior to each race and were subject to fluctuation based on the number of bets placed on each horse. It was apparent to me that individuals were placing bets on their predictions of which horse would emerge victorious or place in the top three. This sparked my curiosity and led me to consider the possibility of gathering data from each race to develop a model capable of accurately predicting the outcome. Hence, the primary objective of this project is to create a model that can predict the winner and the top three placements in each race with high accuracy.</p>
+</section>
+<section id="data-description" class="level2">
+<h2 class="anchored" data-anchor-id="data-description">Data description</h2>
+<p>The “Horse Racing in HK” dataset, obtained from Kaggle, contains two distinct datasets - “runs” and “races”. The data spans from June 1997 to August 2005 and pertains to horse races that occurred in Hong Kong. Races were held at two locations - ShaTin(ST) and Happy Valley(HV). Both datasets consist of 37 columns, with runs having more rows than races. This is because the runs dataset includes detailed information on each horse that participated in a given race, while the races dataset provides general information about the race itself.</p>
+<p>Each race in the dataset involves a horse, a jockey (the individual riding the horse), and a trainer (the person responsible for training the horse). These three factors are considered to be the most important factors in predicting the winner of a race. The dataset contains a wealth of information on each of these factors, such as past performance, odds, and other key metrics. These factors, along with other important race-specific information, can be utilized to develop models that can predict the outcome of races more accurately than traditional methods.</p>
+</section>
+<section id="data-cleaning" class="level2">
+<h2 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h2>
+<p>In order to merge the two datasets, I utilized the shared variable of <code>race_id</code>. Additionally, I extracted and merged important variables such as <code>venue</code>, <code>config</code>, <code>surface</code>, <code>distance</code>, and <code>going</code> from the races dataset into the runs dataset. Unnecessary columns such as <code>won</code> were dropped, as the information provided by this column was already captured by the <code>result</code> column.</p>
+<p>To further enhance the dataset, I created new columns that provided additional information on each horse, jockey, and trainer. Specifically, I calculated the percentage of times a horse, jockey, or trainer won or placed in races. This enabled us to gain a deeper understanding of the performance history of each entity and factor this into our predictive model.</p>
+<p>Furthermore, I transformed categorical variables such as <code>venue</code>, <code>horse_country</code>, <code>horse_type</code>, <code>config</code>, and <code>going</code> into numerical format. This was done to simplify the dataset and make it easier to use in our model.</p>
+</section>
+<section id="correlation-table" class="level2">
+<h2 class="anchored" data-anchor-id="correlation-table">Correlation Table</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="final%20project%20presentation_files/figure-html/5663c4a3-1-download.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">download.png</figcaption><p></p>
+</figure>
+</div>
+<p>Through our analysis, I have observed that <code>finish_time</code> and <code>distance</code> exhibit a strong correlation, which is intuitive as the finish time of a horse is directly influenced by the distance of the race. Additionally, I have identified a moderately strong correlation between <code>result</code> and <code>win_odds</code>/<code>placing_odds</code>, which is to be expected as odds are a crucial factor in betting and can impact the outcome of a race.</p>
+<p>Furthermore, I have noted a weak correlation between the generated data for winning percentage and placing percentage for horses, jockeys, and trainers. While these correlations are not particularly strong, they are still worth considering as they may provide some insight into the performance history of the horse, jockey, or trainer, and can help inform betting decisions.</p>
+</section>
+<section id="research-method" class="level2">
+<h2 class="anchored" data-anchor-id="research-method">Research Method</h2>
+<p>Prior to developing the model, a critical step was taken to standardize the data. Standardization of the data ensures that all measurements are on the same scale, enabling fair comparisons between different horses and their respective performances. Standardization also helps to identify important factors for predicting success in races and anomalies in the data.</p>
+<p>Following the standardization process, cross-validation was employed to determine the optimal model for the dataset. The selected model was the RandomForest, which produced a high cross-validation mean of 0.9978. This indicates that the model was able to fit the data extremely well and can be relied upon to make accurate predictions on new data.</p>
+<p>The use of cross-validation is particularly noteworthy as it helps to guard against overfitting, which occurs when a model becomes too closely tailored to the training data, resulting in poor generalization on new data. By using cross-validation, I was able to assess the model’s ability to generalize on new data and identify the best-performing model.</p>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<p>The RandomForest model has shown exceptional performance with a high R-squared value of 0.9971, indicating that it can explain 99.71% of the variance in the target variable. This suggests that the model can effectively fit the data and make accurate predictions. Additionally, the Mean Squared Error (MSE) of 1.002 is relatively low, indicating that the model’s predictions are close to the actual values.</p>
+<p>The model’s effectiveness is further demonstrated by its ability to accurately predict the winners for both <code>race_id</code> 0 and 1, as well as correctly placing the top 3 in <code>race_id</code> 1. This indicates that the model has a strong ability to generalize and make accurate predictions on unseen data.</p>
+<p>One project from Kaggle that also created a model to predict the placements of horses had a R-squared value of 0.995 and a Mean Squared Error of 1.505. So comparing that to my model that was created, mine was a little bit more accurate than theirs.</p>
+<p>The Linear Regression Model below shows the predicted time compared to the actual time. And as we can see in the image, the model fits the lines really well with a few outliers. We would expect to see a few outliers because in the sport of racing, the unpredictable can happen.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="final%20project%20presentation_files/figure-html/cf0a931b-1-download.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">download.png</figcaption><p></p>
+</figure>
+</div>
+<p>For the first race the model was able to predict ten out of the fourteen horses in the race and also get the winner.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="final%20project%20presentation_files/figure-html/72b4e5b9-1-result.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">result.png</figcaption><p></p>
+</figure>
+</div>
+<p>For the second race, it was able to predict eleven of the fourteen accurately and with getting the winner and top 3 correct.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="final%20project%20presentation_files/figure-html/eda448bd-1-result1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">result1.png</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>In this project, I have demonstrated the power of data science and machine learning in analyzing the complex and dynamic field of horse racing in Hong Kong. Our analysis has revealed that a range of factors contribute to a horse’s success in this context, including past performance, track conditions, and various other variables.</p>
+<p>Our model, which incorporates these factors, has shown exceptional performance with high levels of accuracy in predicting the placement of horses in races. By leveraging the power of advanced statistical and machine learning techniques, I have created a tool that can outperform traditional methods and provide valuable insights to bettors.</p>
+<p>Overall, this project has demonstrated the immense potential of data science and machine learning in the field of horse racing, and the importance of leveraging advanced techniques to gain a competitive edge. As the industry continues to evolve and grow, I believe that the insights and techniques developed in this project will prove invaluable to those seeking to make informed decisions and achieve success in this exciting and challenging field. But in the end, models that try to predict the future will never be 100%, especially racing, because everything is unpredictable and anything can happen.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
